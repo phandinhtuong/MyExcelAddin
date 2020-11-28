@@ -69,6 +69,15 @@ namespace MyExcelAddIn
             string tempFile = Path.GetTempFileName(); //create a temp file to save QRCode image
             img.Save(tempFile, System.Drawing.Imaging.ImageFormat.Png);//save QRCode image to temp file
 
+
+            //old one - use clipboard
+            //MemoryStream ms = new MemoryStream();
+            //img.Save(ms, System.Drawing.Imaging.ImageFormat.Png); //save QRCode image to memory stream
+            //System.Drawing.Image i = System.Drawing.Image.FromStream(ms); // create image in Image form
+            //Clipboard.SetDataObject(i);// set image to clipboard
+
+
+
             return tempFile;
         }
 

@@ -18,7 +18,7 @@ namespace ExcelFuntions
         private static readonly string[] Tien = new string[6] { "", " nghìn", " triệu", " tỷ", " nghìn tỷ", " triệu tỷ" };
 
         private static readonly string[] NumberInText = new string[10] { "zero" , "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-        private static readonly string[] Money = new string[6] { "", " thousand", " million", " billion", "trillion", " quadrillion"};
+        private static readonly string[] Money = new string[6] { "", "thousand", "million", "billion", "trillion", "quadrillion"};
 
         private static readonly long BiggestNumber = 8999999999999999;
 
@@ -81,7 +81,10 @@ namespace ExcelFuntions
             }
             for (i = lan; i >= 0; i--)
             {
-                tmp = DocSo3ChuSo(ViTri[i]);
+                bool hasPrevious;// kiểm tra ở trước có không để hiển thị "linh", vd: 1001 : một nghìn không trăm linh một
+                if (i == lan) hasPrevious = false; 
+                else hasPrevious = true;
+                tmp = DocSo3ChuSo(hasPrevious, ViTri[i]);
                 KetQua += tmp;
                 if (ViTri[i] != 0) KetQua += Tien[i];
                 if ((i > 0) && (!string.IsNullOrEmpty(tmp))) KetQua += ",";//&& (!string.IsNullOrEmpty(tmp))
@@ -172,7 +175,7 @@ namespace ExcelFuntions
         /// </summary>
         /// <param name="baso"></param>
         /// <returns></returns>
-        static private string DocSo3ChuSo(int baso)
+        static private string DocSo3ChuSo(Boolean hasPrevious, int baso)
         {
             int tram, chuc, donvi;
             string KetQua = "";
@@ -180,7 +183,8 @@ namespace ExcelFuntions
             chuc = (int)((baso % 100) / 10);
             donvi = baso % 10;
             if ((tram == 0) && (chuc == 0) && (donvi == 0)) return "";
-            if (tram != 0)
+            //if (tram != 0) // lỗi: 1001 không đọc là "một nghìn không trăm linh một
+            if (hasPrevious || tram != 0)
             {
                 KetQua += ChuSo[tram] + " trăm";
                 if ((chuc == 0) && (donvi != 0)) KetQua += " linh";
@@ -237,12 +241,12 @@ namespace ExcelFuntions
             if ((hundreds == 0) && (tens == 0) && (ones == 0)) return "";
             if (hundreds != 0)
             {
-                Result += NumberInText[hundreds] + " hundred";
+                Result += NumberInText[hundreds] + " hundred ";
                 //if ((tens == 0) && (ones != 0)) Result += ""
             }
             if ((tens == 0) && (ones != 0))
             {
-                Result += " "+ NumberInText[ones];
+                Result += NumberInText[ones] + " ";
             }
             else if ((tens == 0) && (ones == 0))
             {
@@ -254,16 +258,16 @@ namespace ExcelFuntions
                 {
                     switch (ones)
                     {
-                        case 0: Result += " ten"; break;
-                        case 1: Result += " eleven"; break;
-                        case 2: Result += " twelve"; break;
-                        case 3: Result += " thirteen"; break;
-                        case 4: Result += " fourteen"; break;
-                        case 5: Result += " fifteen"; break;
-                        case 6: Result += " sixteen"; break;
-                        case 7: Result += " seventeen"; break;
-                        case 8: Result += " eighteen"; break;
-                        case 9: Result += " nineteen"; break;
+                        case 0: Result += "ten "; break;
+                        case 1: Result += "eleven "; break;
+                        case 2: Result += "twelve "; break;
+                        case 3: Result += "thirteen "; break;
+                        case 4: Result += "fourteen "; break;
+                        case 5: Result += "fifteen "; break;
+                        case 6: Result += "sixteen "; break;
+                        case 7: Result += "seventeen "; break;
+                        case 8: Result += "eighteen "; break;
+                        case 9: Result += "nineteen "; break;
                         default: break;
                     }
                 }
@@ -271,17 +275,17 @@ namespace ExcelFuntions
                 {
                     switch (tens)
                     {
-                        case 2: Result += " twenty"; break;
-                        case 3: Result += " thirty"; break;
-                        case 4: Result += " forty"; break;
-                        case 5: Result += " fifty"; break;
-                        case 6: Result += " sixty"; break;
-                        case 7: Result += " seventy"; break;
-                        case 8: Result += " eighty"; break;
-                        case 9: Result += " ninety"; break;
+                        case 2: Result += "twenty"; break;
+                        case 3: Result += "thirty"; break;
+                        case 4: Result += "forty"; break;
+                        case 5: Result += "fifty"; break;
+                        case 6: Result += "sixty"; break;
+                        case 7: Result += "seventy"; break;
+                        case 8: Result += "eighty"; break;
+                        case 9: Result += "ninety"; break;
                         default: break;
                     }
-                    Result += "-"+ NumberInText[ones];
+                    Result += "-"+ NumberInText[ones]+" ";
                 }
             }
             

@@ -39,6 +39,7 @@ namespace ExcelAddIn
         /// </summary>
         private void InitializeComponent()
         {
+            Microsoft.Office.Tools.Ribbon.RibbonDialogLauncher ribbonDialogLauncherImpl1 = this.Factory.CreateRibbonDialogLauncher();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl1 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl2 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl3 = this.Factory.CreateRibbonDropDownItem();
@@ -84,56 +85,31 @@ namespace ExcelAddIn
             this.buttonImage2Cells.ShowImage = true;
             this.buttonImage2Cells.SuperTip = "Mỗi pixcel ảnh sẽ trở thành một cell trên excel. Ảnh được tự động co sao cho số đ" +
     "iểm ảnh không quá 82455 do giới hạn của Excel";
-            this.buttonImage2Cells.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonImage2Cells_Click);
-
-            //
-            // groupCortana
-            //
-            this.groupCortana.Items.Add(this.buttonCortana);
-            this.groupCortana.Label = "Cortana";
-            this.groupCortana.Name = "groupCortana";
-            //
-            // buttonCortana
-            //
-            this.buttonCortana.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.buttonCortana.Description = "???";
-            this.buttonCortana.Label = "Cortana";
-            this.buttonCortana.Name = "buttonCortana";
-            this.buttonCortana.OfficeImageId = "AllCategories";
-            this.buttonCortana.ScreenTip = "Cortana - Speech recognition";
-            this.buttonCortana.ShowImage = true;
-            this.buttonCortana.SuperTip = "Speech recognition";
-            this.buttonCortana.Click += (sender, e) => this.buttonCortana_Click();
-
+            this.buttonImage2Cells.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ButtonImage2Cells_Click);
             // 
             // groupAlgorithm
             // 
+            this.groupAlgorithm.DialogLauncher = ribbonDialogLauncherImpl1;
             this.groupAlgorithm.Items.Add(this.buttonColorize);
             this.groupAlgorithm.Items.Add(this.dropDownColorRGB);
             this.groupAlgorithm.Items.Add(this.editSaturationPeak);
             this.groupAlgorithm.Label = "Algorithm";
             this.groupAlgorithm.Name = "groupAlgorithm";
             // 
-            // buttonCorlorize
+            // buttonColorize
             // 
             this.buttonColorize.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.buttonColorize.Label = "Màu hóa";
-            this.buttonColorize.Name = "button1";
+            this.buttonColorize.Name = "buttonColorize";
             this.buttonColorize.OfficeImageId = "BlackAndWhiteLightGrayscale";
             this.buttonColorize.ScreenTip = "Màu hóa ma trận giá trị";
             this.buttonColorize.ShowImage = true;
             this.buttonColorize.SuperTip = "Lựa chọn một bảng, sau đó bấm nút Màu hóa. Các cell trong bảng sẽ được tô màu với" +
     " mức xám thay đổi  từ màu đen (0) tới mức cực đại, của màu chỉ định trong dropbo" +
     "x";
-
-            //this code cannot pass arguments
-            //this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonColorize);
-
-            //use this code to pass arguments: color and saturation
-            this.buttonColorize.Click += (sender,e) => this.buttonColorize_Click(dropDownColorRGB.SelectedItem.OfficeImageId,editSaturationPeak.Text);
-
+            this.buttonColorize.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ButtonColorize_Click);
             // 
-            // dropDown1
+            // dropDownColorRGB
             // 
             ribbonDropDownItemImpl1.Label = "Đỏ";
             ribbonDropDownItemImpl1.OfficeImageId = "AppointmentColor1";
@@ -148,13 +124,31 @@ namespace ExcelAddIn
             this.dropDownColorRGB.Items.Add(ribbonDropDownItemImpl3);
             this.dropDownColorRGB.Items.Add(ribbonDropDownItemImpl4);
             this.dropDownColorRGB.Label = "Màu";
-            this.dropDownColorRGB.Name = "dropDown1";
+            this.dropDownColorRGB.Name = "dropDownColorRGB";
             // 
             // editSaturationPeak
             // 
             this.editSaturationPeak.Label = "Cực đại";
             this.editSaturationPeak.Name = "editSaturationPeak";
             this.editSaturationPeak.Text = "255";
+            // 
+            // groupCortana
+            // 
+            this.groupCortana.Items.Add(this.buttonCortana);
+            this.groupCortana.Label = "Cortana";
+            this.groupCortana.Name = "groupCortana";
+            // 
+            // buttonCortana
+            // 
+            this.buttonCortana.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.buttonCortana.Description = "???";
+            this.buttonCortana.Label = "Cortana";
+            this.buttonCortana.Name = "buttonCortana";
+            this.buttonCortana.OfficeImageId = "AllCategories";
+            this.buttonCortana.ScreenTip = "Cortana - Speech recognition";
+            this.buttonCortana.ShowImage = true;
+            this.buttonCortana.SuperTip = "Speech recognition";
+            this.buttonCortana.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ButtonCortana_Click);
             // 
             // MyRibon
             // 
@@ -168,6 +162,8 @@ namespace ExcelAddIn
             this.groupImportImage.PerformLayout();
             this.groupAlgorithm.ResumeLayout(false);
             this.groupAlgorithm.PerformLayout();
+            this.groupCortana.ResumeLayout(false);
+            this.groupCortana.PerformLayout();
             this.ResumeLayout(false);
 
         }
