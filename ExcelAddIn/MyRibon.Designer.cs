@@ -44,6 +44,7 @@ namespace ExcelAddIn
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl2 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl3 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl4 = this.Factory.CreateRibbonDropDownItem();
+            Microsoft.Office.Tools.Ribbon.RibbonDialogLauncher ribbonDialogLauncherImpl2 = this.Factory.CreateRibbonDialogLauncher();
             this.tab1 = this.Factory.CreateRibbonTab();
             this.groupImportImage = this.Factory.CreateRibbonGroup();
             this.buttonImage2Cells = this.Factory.CreateRibbonButton();
@@ -95,11 +96,12 @@ namespace ExcelAddIn
             this.groupAlgorithm.Items.Add(this.editSaturationPeak);
             this.groupAlgorithm.Label = "Algorithm";
             this.groupAlgorithm.Name = "groupAlgorithm";
+            this.groupAlgorithm.DialogLauncherClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.GroupAlgorithm_DialogLauncherClick);
             // 
             // buttonColorize
             // 
             this.buttonColorize.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.buttonColorize.Label = "Màu hóa";
+            this.buttonColorize.Label = Properties.Resources.String1;
             this.buttonColorize.Name = "buttonColorize";
             this.buttonColorize.OfficeImageId = "BlackAndWhiteLightGrayscale";
             this.buttonColorize.ScreenTip = "Màu hóa ma trận giá trị";
@@ -123,7 +125,7 @@ namespace ExcelAddIn
             this.dropDownColorRGB.Items.Add(ribbonDropDownItemImpl2);
             this.dropDownColorRGB.Items.Add(ribbonDropDownItemImpl3);
             this.dropDownColorRGB.Items.Add(ribbonDropDownItemImpl4);
-            this.dropDownColorRGB.Label = "Màu";
+            this.dropDownColorRGB.Label = Properties.Resources.ColorString;
             this.dropDownColorRGB.Name = "dropDownColorRGB";
             // 
             // editSaturationPeak
@@ -134,6 +136,7 @@ namespace ExcelAddIn
             // 
             // groupCortana
             // 
+            this.groupCortana.DialogLauncher = ribbonDialogLauncherImpl2;
             this.groupCortana.Items.Add(this.buttonCortana);
             this.groupCortana.Label = "Cortana";
             this.groupCortana.Name = "groupCortana";

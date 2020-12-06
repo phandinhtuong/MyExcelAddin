@@ -61,7 +61,16 @@ namespace ExcelAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mau hoa.
+        ///   Looks up a localized string similar to neutral.
+        /// </summary>
+        internal static string ColorString {
+            get {
+                return ResourceManager.GetString("ColorString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neutral.
         /// </summary>
         internal static string String1 {
             get {

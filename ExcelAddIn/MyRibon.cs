@@ -296,5 +296,10 @@ namespace ExcelAddIn
 
 
         }
+
+        private void GroupAlgorithm_DialogLauncherClick(object sender, RibbonControlEventArgs e)
+        {
+            
+        }
     }
 }
