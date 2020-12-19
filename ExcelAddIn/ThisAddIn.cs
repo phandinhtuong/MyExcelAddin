@@ -18,7 +18,11 @@ namespace ExcelAddIn
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            
+            //System.Threading.Thread.CurrentThread.CurrentUICulture =
+            //    new System.Globalization.CultureInfo(Application.LanguageSettings.LanguageID[Office.MsoAppLanguageID.msoLanguageIDUI]);
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("vi");
+            //Properties.Resources.Culture = new System.Globalization.CultureInfo("vi-VN");
+            Properties.Resources.Culture = new System.Globalization.CultureInfo(Application.LanguageSettings.LanguageID[Office.MsoAppLanguageID.msoLanguageIDUI]);
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
@@ -32,6 +36,8 @@ namespace ExcelAddIn
         protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
             {
+                //Properties.Resources.Culture = new System.Globalization.CultureInfo("vi-VN");
+                //Properties.Resources.Culture = new System.Globalization.CultureInfo(Application.LanguageSettings.LanguageID[Office.MsoAppLanguageID.msoLanguageIDUI]);
                 return Globals.Factory.GetRibbonFactory().CreateRibbonManager(
                     new Microsoft.Office.Tools.Ribbon.IRibbonExtension[] { new MyRibon() });
             }

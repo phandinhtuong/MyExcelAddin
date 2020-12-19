@@ -301,5 +301,41 @@ namespace ExcelAddIn
         {
             
         }
+
+        private void ButtonArrowScroll_Click(object sender, RibbonControlEventArgs e)
+        {
+            //if (!((Range)Globals.ThisAddIn.Application.Selection is Microsoft.Office.Interop.Excel.Range currentRange)) return;
+            //if (Control.ModifierKeys == Keys.Shift) currentRange.Value = "ctrl";
+            //currentRange.Value = "ctrl";
+            //Control.ModifierKeys s = new KeyPressEventHandler(keypressed);
+            //Keys.do
+            //SendKeys.Send("{CAPSLOCK}d");
+            //SendKeys.Send("{a}");
+            SendKeys.Send("{Down}{SCROLLLOCK}{Down}");
+            //SendKeys.Send("{Down}");
+        }
+
+        private void DownScroll_Click(object sender, RibbonControlEventArgs e)
+        {
+            //if (downScroll.Checked)
+            //{
+            //    SendKeys.Send("{Down}{SCROLLLOCK}{Down}");
+            //    if (Control.ModifierKeys == Keys.Shift) SendKeys.Send("{Down}{SCROLLLOCK}{Down}");
+            //}
+            //else
+            //{
+            //    SendKeys.Send("{Up}{SCROLLLOCK}{up}");
+            //}
+            //while (downScroll.Checked && Control.ModifierKeys == Keys.Shift)
+            //{
+            //    //if (Control.ModifierKeys == Keys.Shift) 
+            //        SendKeys.Send("{Down}{SCROLLLOCK}{Down}");
+            //}
+            SendKeys.Send("{Down}{SCROLLLOCK}{Down}");
+        }
+        //private void keypressed(object o, KeyPressEventArgs e)
+        //{
+        
+        //}
     }
 }

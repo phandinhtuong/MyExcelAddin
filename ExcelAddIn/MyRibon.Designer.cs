@@ -15,6 +15,8 @@ namespace ExcelAddIn
         public MyRibon()
             : base(Globals.Factory.GetRibbonFactory())
         {
+            //Properties.Resources.Culture = new System.Globalization.CultureInfo("vi-VN");
+            //Properties.Resources.Culture = new System.Globalization.CultureInfo(Application.LanguageSettings.LanguageID[Office.MsoAppLanguageID.msoLanguageIDUI]);
             InitializeComponent();
         }
 
@@ -47,17 +49,21 @@ namespace ExcelAddIn
             Microsoft.Office.Tools.Ribbon.RibbonDialogLauncher ribbonDialogLauncherImpl2 = this.Factory.CreateRibbonDialogLauncher();
             this.tab1 = this.Factory.CreateRibbonTab();
             this.groupImportImage = this.Factory.CreateRibbonGroup();
-            this.buttonImage2Cells = this.Factory.CreateRibbonButton();
             this.groupAlgorithm = this.Factory.CreateRibbonGroup();
-            this.buttonColorize = this.Factory.CreateRibbonButton();
             this.dropDownColorRGB = this.Factory.CreateRibbonDropDown();
             this.editSaturationPeak = this.Factory.CreateRibbonEditBox();
             this.groupCortana = this.Factory.CreateRibbonGroup();
+            this.ArrowScroll = this.Factory.CreateRibbonGroup();
+            this.downScroll = this.Factory.CreateRibbonCheckBox();
+            this.buttonImage2Cells = this.Factory.CreateRibbonButton();
+            this.buttonColorize = this.Factory.CreateRibbonButton();
             this.buttonCortana = this.Factory.CreateRibbonButton();
+            this.buttonArrowScroll = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.groupImportImage.SuspendLayout();
             this.groupAlgorithm.SuspendLayout();
             this.groupCortana.SuspendLayout();
+            this.ArrowScroll.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
@@ -66,6 +72,7 @@ namespace ExcelAddIn
             this.tab1.Groups.Add(this.groupImportImage);
             this.tab1.Groups.Add(this.groupAlgorithm);
             this.tab1.Groups.Add(this.groupCortana);
+            this.tab1.Groups.Add(this.ArrowScroll);
             this.tab1.Label = "TabAddIns";
             this.tab1.Name = "tab1";
             // 
@@ -74,19 +81,6 @@ namespace ExcelAddIn
             this.groupImportImage.Items.Add(this.buttonImage2Cells);
             this.groupImportImage.Label = "Import Image";
             this.groupImportImage.Name = "groupImportImage";
-            // 
-            // buttonImage2Cells
-            // 
-            this.buttonImage2Cells.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.buttonImage2Cells.Description = "Haha";
-            this.buttonImage2Cells.Label = "Load Image";
-            this.buttonImage2Cells.Name = "buttonImage2Cells";
-            this.buttonImage2Cells.OfficeImageId = "AllCategories";
-            this.buttonImage2Cells.ScreenTip = "Chuyển ảnh thành cell";
-            this.buttonImage2Cells.ShowImage = true;
-            this.buttonImage2Cells.SuperTip = "Mỗi pixcel ảnh sẽ trở thành một cell trên excel. Ảnh được tự động co sao cho số đ" +
-    "iểm ảnh không quá 82455 do giới hạn của Excel";
-            this.buttonImage2Cells.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ButtonImage2Cells_Click);
             // 
             // groupAlgorithm
             // 
@@ -97,19 +91,6 @@ namespace ExcelAddIn
             this.groupAlgorithm.Label = "Algorithm";
             this.groupAlgorithm.Name = "groupAlgorithm";
             this.groupAlgorithm.DialogLauncherClick += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.GroupAlgorithm_DialogLauncherClick);
-            // 
-            // buttonColorize
-            // 
-            this.buttonColorize.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.buttonColorize.Label = Properties.Resources.String1;
-            this.buttonColorize.Name = "buttonColorize";
-            this.buttonColorize.OfficeImageId = "BlackAndWhiteLightGrayscale";
-            this.buttonColorize.ScreenTip = "Màu hóa ma trận giá trị";
-            this.buttonColorize.ShowImage = true;
-            this.buttonColorize.SuperTip = "Lựa chọn một bảng, sau đó bấm nút Màu hóa. Các cell trong bảng sẽ được tô màu với" +
-    " mức xám thay đổi  từ màu đen (0) tới mức cực đại, của màu chỉ định trong dropbo" +
-    "x";
-            this.buttonColorize.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ButtonColorize_Click);
             // 
             // dropDownColorRGB
             // 
@@ -125,7 +106,7 @@ namespace ExcelAddIn
             this.dropDownColorRGB.Items.Add(ribbonDropDownItemImpl2);
             this.dropDownColorRGB.Items.Add(ribbonDropDownItemImpl3);
             this.dropDownColorRGB.Items.Add(ribbonDropDownItemImpl4);
-            this.dropDownColorRGB.Label = Properties.Resources.ColorString;
+            this.dropDownColorRGB.Label = global::ExcelAddIn.Properties.Resources.ColorString;
             this.dropDownColorRGB.Name = "dropDownColorRGB";
             // 
             // editSaturationPeak
@@ -141,6 +122,46 @@ namespace ExcelAddIn
             this.groupCortana.Label = "Cortana";
             this.groupCortana.Name = "groupCortana";
             // 
+            // ArrowScroll
+            // 
+            this.ArrowScroll.Items.Add(this.buttonArrowScroll);
+            this.ArrowScroll.Items.Add(this.downScroll);
+            this.ArrowScroll.Label = "Arrow Scroll";
+            this.ArrowScroll.Name = "ArrowScroll";
+            // 
+            // downScroll
+            // 
+            this.downScroll.Enabled = false;
+            this.downScroll.Label = "downScroll";
+            this.downScroll.Name = "downScroll";
+            this.downScroll.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.DownScroll_Click);
+            // 
+            // buttonImage2Cells
+            // 
+            this.buttonImage2Cells.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.buttonImage2Cells.Description = "Haha";
+            this.buttonImage2Cells.Label = "Load Image";
+            this.buttonImage2Cells.Name = "buttonImage2Cells";
+            this.buttonImage2Cells.OfficeImageId = "AllCategories";
+            this.buttonImage2Cells.ScreenTip = "Chuyển ảnh thành cell";
+            this.buttonImage2Cells.ShowImage = true;
+            this.buttonImage2Cells.SuperTip = "Mỗi pixcel ảnh sẽ trở thành một cell trên excel. Ảnh được tự động co sao cho số đ" +
+    "iểm ảnh không quá 82455 do giới hạn của Excel";
+            this.buttonImage2Cells.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ButtonImage2Cells_Click);
+            // 
+            // buttonColorize
+            // 
+            this.buttonColorize.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.buttonColorize.Label = global::ExcelAddIn.Properties.Resources.String1;
+            this.buttonColorize.Name = "buttonColorize";
+            this.buttonColorize.OfficeImageId = "BlackAndWhiteLightGrayscale";
+            this.buttonColorize.ScreenTip = "Màu hóa ma trận giá trị";
+            this.buttonColorize.ShowImage = true;
+            this.buttonColorize.SuperTip = "Lựa chọn một bảng, sau đó bấm nút Màu hóa. Các cell trong bảng sẽ được tô màu với" +
+    " mức xám thay đổi  từ màu đen (0) tới mức cực đại, của màu chỉ định trong dropbo" +
+    "x";
+            this.buttonColorize.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ButtonColorize_Click);
+            // 
             // buttonCortana
             // 
             this.buttonCortana.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -152,6 +173,15 @@ namespace ExcelAddIn
             this.buttonCortana.ShowImage = true;
             this.buttonCortana.SuperTip = "Speech recognition";
             this.buttonCortana.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ButtonCortana_Click);
+            // 
+            // buttonArrowScroll
+            // 
+            this.buttonArrowScroll.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.buttonArrowScroll.Label = "Down and Scroll";
+            this.buttonArrowScroll.Name = "buttonArrowScroll";
+            this.buttonArrowScroll.OfficeImageId = "AllCategories";
+            this.buttonArrowScroll.ShowImage = true;
+            this.buttonArrowScroll.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ButtonArrowScroll_Click);
             // 
             // MyRibon
             // 
@@ -167,6 +197,8 @@ namespace ExcelAddIn
             this.groupAlgorithm.PerformLayout();
             this.groupCortana.ResumeLayout(false);
             this.groupCortana.PerformLayout();
+            this.ArrowScroll.ResumeLayout(false);
+            this.ArrowScroll.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -182,6 +214,9 @@ namespace ExcelAddIn
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox editSaturationPeak;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupCortana;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonCortana;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup ArrowScroll;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonArrowScroll;
+        internal Microsoft.Office.Tools.Ribbon.RibbonCheckBox downScroll;
     }
 
     partial class ThisRibbonCollection
